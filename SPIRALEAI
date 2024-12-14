@@ -1,0 +1,81 @@
+# SpiraleAI: An Open-Source Framework for Recursive AI Architectures
+# Developed for multi-level decision making and learning through feedback loops
+
+import numpy as np
+import torch
+from torch import nn
+
+class SpiraleAI:
+    def __init__(self, input_size, hidden_sizes, output_size, recursion_depth):
+        """
+        Initialize the SpiraleAI model with recursive feedback layers.
+        
+        Args:
+            input_size (int): Number of input features.
+            hidden_sizes (list): List of hidden layer sizes.
+            output_size (int): Number of output features.
+            recursion_depth (int): Depth of recursive feedback.
+        """
+        self.input_size = input_size
+        self.hidden_sizes = hidden_sizes
+        self.output_size = output_size
+        self.recursion_depth = recursion_depth
+        
+        # Define the layers
+        layers = []
+        prev_size = input_size
+        for size in hidden_sizes:
+            layers.append(nn.Linear(prev_size, size))
+            layers.append(nn.ReLU())
+            prev_size = size
+        
+        layers.append(nn.Linear(prev_size, output_size))
+        self.model = nn.Sequential(*layers)
+        self.recursion_layer = nn.Linear(output_size, input_size)
+
+    def forward(self, x):
+        """Forward pass through the recursive layers."""
+        for _ in range(self.recursion_depth):
+            output = self.model(x)
+            feedback = self.recursion_layer(output)
+            x = x + feedback  # Add feedback to the input (recursive loop)
+        return output
+
+    def train_model(self, train_loader, epochs, learning_rate):
+        """
+        Train the SpiraleAI model.
+        
+        Args:
+            train_loader (DataLoader): Training data loader.
+            epochs (int): Number of training epochs.
+            learning_rate (float): Learning rate.
+        """
+        optimizer = torch.optim.Adam(self.model.parameters(), lr=learning_rate)
+        loss_fn = nn.MSELoss()
+
+        for epoch in range(epochs):
+            for inputs, targets in train_loader:
+                optimizer.zero_grad()
+                predictions = self.forward(inputs)
+                loss = loss_fn(predictions, targets)
+                loss.backward()
+                optimizer.step()
+            print(f"Epoch {epoch+1}/{epochs}, Loss: {loss.item():.4f}")
+
+if __name__ == "__main__":
+    # Example usage of SpiraleAI
+    input_size = 10
+    hidden_sizes = [32, 64, 32]
+    output_size = 1
+    recursion_depth = 3
+
+    spirale_ai = SpiraleAI(input_size, hidden_sizes, output_size, recursion_depth)
+
+    # Simulated training data
+    x_train = torch.rand(100, input_size)
+    y_train = torch.rand(100, output_size)
+
+    train_dataset = torch.utils.data.TensorDataset(x_train, y_train)
+    train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=10, shuffle=True)
+
+    spirale_ai.train_model(train_loader, epochs=10, learning_rate=0.001)

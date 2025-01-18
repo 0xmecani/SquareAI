@@ -1,0 +1,8 @@
+VisionDex/
+├── contracts/              # Smart contracts for the DEX
+├── backend/                # Backend server code
+├── frontend/               # Frontend web application
+├── ai-engine/              # AI algorithms and models
+├── tests/                  # Unit and integration tests
+├── docs/                   # Documentation
+└── README.md               # Project overview

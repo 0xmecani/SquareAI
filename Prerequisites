@@ -1,0 +1,5 @@
+- [Node.js](https://nodejs.org/) (v16 or above)
+- [Python](https://www.python.org/) (v3.8 or above)
+- [Hardhat](https://hardhat.org/) for smart contract development
+- [Docker](https://www.docker.com/) for containerization
+- A wallet provider like [MetaMask](https://metamask.io/)

@@ -1,14 +1,14 @@
-# VisionDex AI: An Open-Source Framework for Recursive AI Architectures
+# SquareAI: An Open-Source Framework for Recursive AI Architectures
 # Developed for multi-level decision making and learning through feedback loops
 
 import numpy as np
 import torch
 from torch import nn
 
-class VisionDex AI:
+class SquareAI:
     def __init__(self, input_size, hidden_sizes, output_size, recursion_depth):
         """
-        Initialize the VisionDex AI model with recursive feedback layers.
+        Initialize the SquareAI model with recursive feedback layers.
         
         Args:
             input_size (int): Number of input features.
@@ -43,7 +43,7 @@ class VisionDex AI:
 
     def train_model(self, train_loader, epochs, learning_rate):
         """
-        Train the VisionDex AI model.
+        Train the SquareAI model.
         
         Args:
             train_loader (DataLoader): Training data loader.
@@ -63,13 +63,13 @@ class VisionDex AI:
             print(f"Epoch {epoch+1}/{epochs}, Loss: {loss.item():.4f}")
 
 if __name__ == "__main__":
-    # Example usage of VisionDex AI
+    # Example usage of SquareAI
     input_size = 10
     hidden_sizes = [32, 64, 32]
     output_size = 1
     recursion_depth = 3
 
-    spirale_ai = VisionDex AI(input_size, hidden_sizes, output_size, recursion_depth)
+    spirale_ai = SquareAI(input_size, hidden_sizes, output_size, recursion_depth)
 
     # Simulated training data
     x_train = torch.rand(100, input_size)

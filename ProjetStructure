@@ -1,4 +1,4 @@
-SquareAI/
+LuminaDex/
 ├── contracts/              # Smart contracts for the DEX
 ├── backend/                # Backend server code
 ├── frontend/               # Frontend web application
